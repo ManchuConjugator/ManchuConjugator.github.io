@@ -1,0 +1,275 @@
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Anaheim' rel='stylesheet'>
+    <style>
+        img.center {
+            margin-top: 50px;
+            display:block;
+            margin-left:auto;
+            margin-right:auto
+        }
+
+        div.sig {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        div.f {
+        margin-top: 35px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        font-family:"Anaheim";
+        }
+
+        div.g {
+        margin-left:100px;
+        margin-right:auto;
+        font-family:"Anaheim";
+        }
+
+        h2.data {
+            display:inline-block;
+            color: orangered;
+        }
+
+        #head {
+            color:black;
+            padding-right: 10px;
+            font-weight: normal
+        }
+
+        #verb {
+            display: inline-block;
+            width: 400px;
+            height: 50px;
+            font-size: 30px
+        }
+
+        div.j {
+            margin-left: 0px;
+            display: inline-block;
+            text-align: left;
+        }
+
+        div.x {
+            margin-left: 125px;
+            display: inline-block;
+            text-align: left;
+        }
+
+
+    </style>
+</head>
+<img src="logo.jpg" class="center">
+<div class = "f">
+        <input type="text" id="verb"><br><br>
+        <button type="button" id="sub">Conjugate</button><br><br>
+</div>
+
+
+<div class = "g">
+    <h2 id = "head" type = "head" class="data">Imperative: </h2><h2 class="data" id="Imperative"></h2><br>
+    <h2 id = "head" class="data">Imperfect Participle: </h2><h2 class="data"id="Imperfect Participle"></h2><br>
+    <h2 id = "head" class="data">Perfect Participle: </h2><h2 class="data"id="Perfect Participle"></h2><br>
+    <h2 id = "head" class="data">Imperfect Converb: </h2><h2 class="data"id="Imperfect Converb"></h2><br>
+    <h2 id = "head" class="data">Perfect Converb: </h2><h2 class="data"id="Perfect Converb"></h2><br>
+    <h2 id = "head" class="data">Conditional Converb: </h2><h2 class="data" id="Conditional Converb"></h2><br>
+    <h2 id = "head" class="data">Concessive Converb: </h2><h2 class="data" id="Concessive Converb"></h2><br>
+    <h2 id = "head" class="data">Terminal Converb: </h2><h2 class="data" id="Terminal Converb"></h2><br>
+    <h2 id = "head" class="data">Prefatory Converb: </h2><h2 class="data" id="Prefatory Converb"></h2><br>
+    <h2 id = "head" class="data">Desiderative 1: </h2><h2 class="data" id="Desiderative 1"></h2><br>
+    <h2 id = "head" class="data">Desiderative 2: </h2><h2 class="data" id="Desiderative 2"></h2><br>
+    <h2 id = "head" class="data">Optative: </h2><h2 class="data" id="Optative"></h2><br>
+    <h2 id = "head" class="data">Temeritive: </h2><h2 class="data" id="Temeritive"></h2><br>
+    
+</div>
+
+<div class="f">
+    <div class="j">
+        <p style="font-size:25px"><b>Jacob Kodner (柯雅各)</b></p>
+        <h3 class="b">Undergraduate | Department of Language Science</h3>
+        <h3 class="b">University of California, Irvine</h3>
+    </div>
+
+    <div class="x">
+        <p style="font-size:25px"><b>Meng Rong Lu (孟榮路)</b></p>
+        <h3 class="b">Sebsihiyan Amban | Manchu-Sibe Culture Center</h3>
+        <h3 class="b">Shenyang, China</h3>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById("sub").onclick = function () {conjugate()}
+
+    function conjugate () {
+
+        var stem = document.getElementById("verb").value
+
+        if (stem.slice(-3) == "mbi") {
+            stem = stem.slice(0, -3)
+        }
+
+        var vowels = ["a", "i", "e", "o", "u", "ū"]
+        var back_vowels = ["a", "o", "ū"]
+        var front_vowels = ["e"]
+
+        var last_vowels = []
+        for (var vowel of stem) {
+            if (Object.values(vowels).indexOf(vowel) >= 0) {
+                last_vowels.push(vowel)
+            }
+        }
+
+        last_vowels.reverse()
+
+        function vowel_harmony (last_vowels) {
+            if (last_vowels.length == 1) {
+                if (last_vowels[0] == "a") {
+                    var vowel_suffix = "a"
+                }
+                else if (last_vowels[0] == "o") {
+                    var vowel_suffix = "o"
+                }
+                
+                else if (Object.values(["i", "e", "u"].indexOf(last_vowels[0]) >= 0)) {
+                    var vowel_suffix = "e"
+                }
+            }
+            else if (last_vowels.length == 2) {
+                var last_string = last_vowels.join("")
+                console.log(last_string)
+                if (Object.values(["aa", "ūa", "ua", "io", "iū", "ia", "iu", "ii"]).indexOf(last_string) >= 0) {
+                    var vowel_suffix = "a"
+                }
+                else if (Object.values(["oo", "oa"]).indexOf(last_string) >= 0) {
+                    var vowel_suffix = "o"
+                }
+                else if (Object.values(["ee", "eo", "ue", "ie", "ui", "uu"]).indexOf(last_string) >= 0) {
+                    var vowel_suffix = "e"
+                }
+            }
+
+            else if (last_vowels.length == 3) {
+                if (Object.values(["a", "e", "o"]).indexOf(last_vowels[0]) >= 0) {
+                    var vowel_suffix = last_vowels[0]
+                }
+                if (Object.values(["i", "u"]).indexOf(last_vowels[0]) >= 0) {
+                    if (last_vowels[1] == "e") {
+                        var vowel_suffix = "e"
+                    }
+                    else if (Object.values(["a", "u", "ū"]).indexOf(last_vowels[1]) >= 0) {
+                        var vowel_suffix = "a"
+                    }
+
+                    else if (last_vowels[0] == "ū") {
+                        var vowel_suffix = "a"
+                    }
+                }
+
+            }
+            return vowel_suffix    
+        }
+
+        var letter = vowel_harmony(last_vowels)
+
+        var perf_exceptions = [
+            ["algi", "ešu", "bisa", "dosi", "gala", "gūwaliya", "hami", "isi", "jalu", "jura", "tafa", "tafu", "wasi"], 
+            ["je", "dule", "ebere", "elde", "fuse", "gere", "mukde", "tuci", "tuhe", "wesi"], 
+            ["colgoro", "soro", "tohoro"]
+        ]
+
+        var perf_conv_exceptions = [
+            ["sa", "juwa", "we", "yu", "je"], 
+            ["hūwaliya", "colgoro", "desere", "dule", "gūwaliya", "suma"] 
+        ]
+
+        var results = {
+        "Imperative": stem,
+        "Imperfect Participle": "",
+        "Perfect Participle": "", 
+        "Imperfect Converb": stem + "me",
+        "Perfect Converb": "", 
+        "Conditional Converb": stem + "ci",
+        "Concessive Converb": stem + "cibe",
+        "Terminal Converb": "", 
+        "Prefatory Converb": "", 
+        "Desiderative 1": stem + "ki",
+        "Desiderative 2": stem + "kini",
+        "Optative": stem + "cina",
+        "Temeritive": stem + "rahū"
+        }
+
+        if (last_vowels[0] == "a") {
+            results["Imperfect Participle"] = stem + "ra"
+        }
+
+        else if (Object.values(["e", "i", "u", "ū"]).indexOf(last_vowels[0]) >= 0) {
+            results["Imperfect Participle"] = stem + "re"
+        }
+
+        else if (last_vowels[0] == "o") {
+            results["Imperfect Participle"] = stem + "ro"
+        }
+
+        if (Object.values(perf_exceptions[0]).indexOf(stem) >= 0) {
+            results["Perfect Participle"] = stem + "ka"
+        }
+        else if (Object.values(perf_exceptions[1]).indexOf(stem) >= 0) {
+            results["Perfect Participle"] = stem + "ke"
+        }
+
+        else if (Object.values(perf_exceptions[2]).indexOf(stem) >= 0) {
+            results["Perfect Participle"] = stem + "ko"
+        }
+        
+        else if (Object.values(back_vowels).indexOf(letter) >= 0) {
+            results["Perfect Participle"] = stem + "ha"
+        }
+        else if ((Object.values(front_vowels).indexOf(letter) >= 0) && (letter != "o")) {
+            results["Perfect Participle"] = stem + "he"
+        }
+        else if (letter == "o") {
+            results["Perfect Participle"] = stem + "ho"
+        }
+
+        if (Object.values(perf_conv_exceptions[0]).indexOf(stem) >= 0) {
+            results["Perfect Converb"] = stem + "mpi"
+        }
+        else if (Object.values(perf_conv_exceptions[1]).indexOf(stem) >= 0) {
+            results["Perfect Converb"] = stem + "pi"
+        }
+        else {
+            results["Perfect Converb"] = stem + "fi"
+        }
+
+        if (Object.values(back_vowels).indexOf(letter) >= 0) {
+            results["Terminal Converb"] = stem + "tala"
+        }
+
+        else if ((Object.values(front_vowels).indexOf(letter)>= 0) && (letter != "o")) {
+            results["Terminal Converb"] = stem + "tele"
+        }
+
+        else if (letter == "o") {
+            results["Terminal Converb"] = stem + "tolo"
+        }
+
+        if (Object.values(back_vowels).indexOf(letter) >= 0) {
+            results["Prefatory Converb"] = stem + "nggala"
+        }
+
+        else if ((Object.values(front_vowels).indexOf(letter)>= 0) && (letter != "o")) {
+            results["Prefatory Converb"] = stem + "nggele"
+        }
+
+        else if (letter == "o") {
+            results["Prefatory Converb"] = stem + "nggolo"
+        }
+
+        for (category of Object.keys(results)){
+            document.getElementById(category).innerHTML = results[category]
+        }
+    }
+</script>
+    
